@@ -16,8 +16,7 @@ import $ from "jquery";
 import { AuthAPI } from "utils/net";
 
 import toastr from "toastr";
-import Cookies from "js-cookie";
-import { AUTH_COOKIE_KEY } from 'utils/constants';
+import { login } from "utils/auth";
 
 const schema = {
   username: {
@@ -182,11 +181,9 @@ const SignIn = props => {
       return map;
     }, {});
     AuthAPI.post('login', formdata).then(function (response) {
-      Cookies.set(AUTH_COOKIE_KEY, response.data.token);//, { expires: 1, domain: window.location.hostname, secure: true }
-      console.log(response.data.token);
+      login(response.data.token);
       Router.replace('/dashboard');
     }).catch(function (error) {
-      console.log(error);
       try {
         toastr.error(error.response.data.message, "Galat");
       } catch (ex) {

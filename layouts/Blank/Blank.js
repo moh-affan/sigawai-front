@@ -22,7 +22,6 @@ const Blank = props => {
   const classes = useStyles();
 
   React.useEffect(function () {
-    console.log(classes.root);
     $("." + classes.root).height($(document).height());
   });
 
@@ -30,7 +29,6 @@ const Blank = props => {
     <PerfectScrollbar>
       <div className={classes.root}>
         <main className={classes.content}>
-
           {children}
         </main>
       </div>

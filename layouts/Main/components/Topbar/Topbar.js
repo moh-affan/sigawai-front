@@ -6,13 +6,8 @@ import { makeStyles } from '@material-ui/styles';
 import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
-import InputIcon from '@material-ui/icons/Input';
-
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Avatar from '@material-ui/core/Avatar';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
+import Popover from '@material-ui/core/Popover';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 
@@ -49,22 +44,18 @@ const Topbar = props => {
 
   const [notifications] = useState([1, 2, 3]);
 
-  const [open, setOpen] = React.useState(true);
-  const anchorRef = React.useRef(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  function handleToggle() {
-    console.log(anchorRef.current);
-    console.log('handleToggle');
-    setOpen(prevOpen => !prevOpen);
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
   }
 
-  function handleClose(event) {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-
-    setOpen(false);
+  function handleClose() {
+    setAnchorEl(null);
   }
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <AppBar
@@ -93,8 +84,7 @@ const Topbar = props => {
             alt="Person"
             className={avatarClass.avatar}
             src={user.avatar}
-            ref={anchorRef}
-            onClick={handleToggle}
+            onClick={handleClick}
           />
 
         </Hidden>
@@ -107,24 +97,27 @@ const Topbar = props => {
           </IconButton>
         </Hidden>
       </Toolbar>
-      <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-          >
-            <Paper id="menu-list-grow">
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <MenuList>
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </MenuList>
+      </Popover>
+
     </AppBar>
   );
 };

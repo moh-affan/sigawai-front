@@ -49,10 +49,11 @@ const Topbar = props => {
 
   const [notifications] = useState([1, 2, 3]);
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const anchorRef = React.useRef(null);
 
   function handleToggle() {
+    console.log(anchorRef.current);
     console.log('handleToggle');
     setOpen(prevOpen => !prevOpen);
   }

@@ -1,14 +1,9 @@
 import React from "react";
-import WithLayout from "components/WithLayout/WithLayout";
 import { Dashboard as DashboardView } from "views";
+import WithLayout from "components/WithLayout/WithLayout";
 import Main from "layouts/Main";
 
-const Content = props => {
-    return (<div>Affan</div>)
-}
-
 const Dashboard = props => {
-    // return (<WithLayout component={Content} layout={Main} loginRequired={true} redirectLogin="/" />);
-    return (<WithLayout component={Content} layout={Main} />);
+    return (<WithLayout component={DashboardView} layout={Main} loginRequired={true} redirectLogin="/" />);
 }
 export default Dashboard;

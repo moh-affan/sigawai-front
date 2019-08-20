@@ -57,6 +57,8 @@ import theme, { getTheme } from 'theme';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import 'assets/scss/index.scss';
 import validators from 'common/validators';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
     draw: chartjs.draw
@@ -85,7 +87,9 @@ class MyApp extends App {
         // const thm = getTheme();
         return (
             <ThemeProvider theme={theme}>
-                <Component {...pageProps} />
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <Component {...pageProps} />
+                </MuiPickersUtilsProvider>
             </ThemeProvider>
         )
     }

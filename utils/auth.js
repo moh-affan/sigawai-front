@@ -4,7 +4,7 @@ import nextCookie from 'next-cookies'
 import cookie from 'js-cookie'
 import { AUTH_COOKIE_KEY } from "./constants";
 
-function login({ token }) {
+function login(token) {
   cookie.set(AUTH_COOKIE_KEY, token, { expires: 1 }); //{ expires: 1, domain: window.location.hostname, secure: true }
   Router.push('/dashboard')
 }

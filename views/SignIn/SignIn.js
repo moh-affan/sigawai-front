@@ -181,8 +181,10 @@ const SignIn = props => {
       return map;
     }, {});
     AuthAPI.post('login', formdata).then(function (response) {
-      login(response.data.token);
-      Router.replace('/dashboard');
+      if (response.data.token) {
+        login(response.data.token);
+        Router.replace('/dashboard');
+      }
     }).catch(function (error) {
       try {
         toastr.error(error.response.data.message, "Galat");

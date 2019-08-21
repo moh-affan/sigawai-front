@@ -26,9 +26,8 @@ const Dashboard = () => {
 
   const ws = createWs('user/');
   ws.onopen = () => {
-    ws.send(JSON.stringify({ 'action': 'subscribe', 'group_name': 'broadcast', 'request_id': 1 }));
+    ws.send(JSON.stringify({ 'action': 'subscribe', 'group_name': 'all', 'request_id': 1 }));
     ws.send(JSON.stringify({ 'action': 'list', 'request_id': 1 }));
-    // ws.send(JSON.stringify({ 'action': 'retrieve', 'request_id': 1, 'pk': 3 }));
   }
 
   ws.onmessage = event => {

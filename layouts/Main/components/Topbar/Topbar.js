@@ -11,6 +11,10 @@ import Popover from '@material-ui/core/Popover';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { logout } from "utils/auth";
+import { AuthAPI } from "utils/net";
+import Cookies from "js-cookie";
+import { AUTH_COOKIE_KEY } from "utils/constants";
+import toastr from "toastr";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +40,19 @@ const user = {
   avatar: '/static/images/avatars/avatar_11.png',
   bio: 'Brain Director'
 };
+
+const doLogout = () => {
+  AuthAPI.delete('login', { headers: { authorization: Cookies.get(AUTH_COOKIE_KEY) } }).then(function (response) {
+    if (response.data.success)
+      logout();
+  }).catch(function (error) {
+    try {
+      toastr.error(error.response.data.message, "Galat");
+    } catch (ex) {
+      toastr.error(ex.message, "Galat");
+    }
+  })
+}
 
 const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
@@ -115,7 +132,7 @@ const Topbar = props => {
         <MenuList>
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={logout}>Logout</MenuItem>
+          <MenuItem onClick={doLogout}>Logout</MenuItem>
         </MenuList>
       </Popover>
 

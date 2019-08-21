@@ -59,6 +59,9 @@ import 'assets/scss/index.scss';
 import validators from 'common/validators';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import { CircularProgress } from "components";
+import "assets/loader.css";
+import $ from 'jquery';
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
     draw: chartjs.draw
@@ -82,13 +85,24 @@ class MyApp extends App {
     //   return { ...appProps }
     // }
 
+    componentDidMount() {
+        $('.loader-view').hide();
+        $('.page').show();
+    }
+
     render() {
         const { Component, pageProps } = this.props
         // const thm = getTheme();
         return (
             <ThemeProvider theme={theme}>
                 <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <Component {...pageProps} />
+                    <div className="loader-view"
+                        style={{ height: 'calc(100vh)' }}>
+                        <CircularProgress />
+                    </div>
+                    <div className="page" style={{ display: 'none' }}>
+                        <Component {...pageProps} />
+                    </div>
                 </MuiPickersUtilsProvider>
             </ThemeProvider>
         )

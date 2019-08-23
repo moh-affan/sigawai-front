@@ -1,3 +1,4 @@
 {
-    "eslint.enable": false
+    "eslint.enable": false,
+    "autoimport.filesToScan": "**/*.{ts,tsx,js,jsx,css,sass}"
 }

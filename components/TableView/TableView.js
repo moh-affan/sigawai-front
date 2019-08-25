@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 const TableView = props => {
     const classes = useStyles();
-    const { data, minQueryLength, columns, ...rest } = props
+    const { data, minQueryLength, columns, buttons, ...rest } = props
     const [filteredData, setFilteredData] = useState(data)
     const onSearchListener = (query) => {
         if (query.length >= minQueryLength) {
@@ -28,12 +28,13 @@ const TableView = props => {
             setFilteredData(data);
     }
 
-    return ([
-        <TableToolbar onSearchListener={onSearchListener} key={1} />,
-        <div className={classes.content} key={2}>
-            <TableContent data={filteredData} columns={columns} {...rest} />
-        </div>
-    ]
+    return (
+        <React.Fragment>
+            <TableToolbar onSearchListener={onSearchListener} buttons={buttons} />
+            <div className={classes.content}>
+                <TableContent data={filteredData} columns={columns} {...rest} />
+            </div>
+        </React.Fragment>
     );
 }
 
@@ -41,10 +42,12 @@ TableView.propTypes = {
     columns: PropTypes.arrayOf(PropTypes.object),
     data: PropTypes.array.isRequired,
     minQueryLength: PropTypes.number,
+    buttons: PropTypes.arrayOf(PropTypes.element)
 };
 
 TableView.defaultProps = {
-    minQueryLength: 2
+    minQueryLength: 2,
+    buttons: []
 }
 
 export default TableView

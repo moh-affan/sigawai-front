@@ -51,8 +51,19 @@ const Sidebar = props => {
     },
     {
       title: 'Users',
-      href: '/users',
-      icon: <PeopleIcon />
+      href: '#',
+      icon: <PeopleIcon />,
+      submenu: [
+        {
+          title: 'Pengguna',
+          href: '/users',
+        },
+        {
+          title: 'Produk',
+          href: '/products',
+          icon: <ShoppingBasketIcon />
+        },
+      ]
     },
     {
       title: 'Products',

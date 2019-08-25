@@ -1,4 +1,5 @@
 import uuid from 'uuid/v1';
+import { Typography } from "@material-ui/core";
 
 const data = [
     {
@@ -191,7 +192,7 @@ const columns = [
         name: 'NIK',
         key: 'nik',
         render: function (data, rowData, rowIndex, colIndex) {
-            return (<h2>{data}</h2>)
+            return (<Typography color="primary">{data}</Typography>)
         }
     },
     {

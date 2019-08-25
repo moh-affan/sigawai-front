@@ -74,6 +74,12 @@ const Menu = props => {
         else
             marker = <ExpandMore />
     const selected = process.browser ? Router.pathname.includes(page.href) : false;
+    if (page.divider)
+        return (
+            <React.Fragment>
+                {page.divider}
+            </React.Fragment>
+        );
     return (
         <React.Fragment>
             <ListItem

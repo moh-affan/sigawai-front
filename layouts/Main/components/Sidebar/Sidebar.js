@@ -49,6 +49,7 @@ const Sidebar = props => {
       href: '/pegawai',
       icon: <DashboardIcon />
     },
+    { divider: <Divider /> },
     {
       title: 'Users',
       href: '#',

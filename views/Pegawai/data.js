@@ -1,5 +1,7 @@
 import uuid from 'uuid/v1';
 import { Typography } from "@material-ui/core";
+import moment from "moment";
+import "moment/locale/id";
 
 const data = [
     {
@@ -200,12 +202,12 @@ const columns = [
         key: 'nama'
     },
     {
-        name: 'Tempat Lahir',
-        key: 'tempat_lahir'
-    },
-    {
-        name: 'Tanggal Lahir',
-        key: 'tgl_lahir'
+        name: 'Tempat, Tanggal Lahir',
+        key: 'tempat_lahir',
+        render: function (data, rowData, rowIndex, colIndex) {
+            const tgl = moment(rowData.tgl_lahir, "DD-MM-YYYY").locale('id').format('LL');
+            return (<Typography color="textPrimary">{`${data}, ${tgl}`}</Typography>)
+        }
     },
     {
         name: 'Jenis Kelamin',

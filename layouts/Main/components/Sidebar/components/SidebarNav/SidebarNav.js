@@ -23,7 +23,7 @@ const SidebarNav = props => {
       className={clsx(classes.root, className)}
     >
       {pages.map((page, i) => {
-        return (<Menu page={page} key={page.title} />)
+        return (<Menu page={page} key={page.title + " " + i} />)
       })}
     </List>
   );

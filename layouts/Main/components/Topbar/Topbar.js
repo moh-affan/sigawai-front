@@ -18,14 +18,16 @@ import toastr from "toastr";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: 'none'
+    // boxShadow: 'none',
+    // display: 'flex',
+    zIndex: theme.zIndex.drawer + 1,
   },
   flexGrow: {
     flexGrow: 1
   },
   signOutButton: {
     marginLeft: theme.spacing(1)
-  }
+  },
 }));
 
 const useStylesAvatar = makeStyles(theme => ({
@@ -78,6 +80,7 @@ const Topbar = props => {
   return (
     <AppBar
       {...rest}
+      position="fixed"
       className={clsx(classes.root, className)}
     >
       <Toolbar>
@@ -107,6 +110,12 @@ const Topbar = props => {
 
         </Hidden>
         <Hidden lgUp>
+          <Avatar
+            alt="Person"
+            className={avatarClass.avatar}
+            src={user.avatar}
+            onClick={handleClick}
+          />
           <IconButton
             color="inherit"
             onClick={onSidebarOpen}

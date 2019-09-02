@@ -10,13 +10,11 @@ import {
   Typography
 } from '@material-ui/core';
 import Router from "next/router";
-
 import $ from "jquery";
-
 import { AuthAPI } from "utils/net";
-
 import toastr from "toastr";
 import { login } from "utils/auth";
+import uuid from 'uuid/v1';
 
 const schema = {
   username: {
@@ -180,6 +178,10 @@ const SignIn = props => {
       map[obj.name] = obj.value;
       return map;
     }, {});
+    if (process.env.NODE_ENV !== 'production') {
+      login(uuid());
+      return;
+    }
     AuthAPI.post('login', formdata).then(function (response) {
       if (response.data.token) {
         login(response.data.token);

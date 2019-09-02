@@ -44,6 +44,10 @@ const user = {
 };
 
 const doLogout = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    logout();
+    return;
+  }
   AuthAPI.delete('login', { headers: { authorization: Cookies.get(AUTH_COOKIE_KEY) } }).then(function (response) {
     if (response.data.success)
       logout();

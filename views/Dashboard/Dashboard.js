@@ -24,14 +24,16 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
-  const ws = createWs('user/');
-  ws.onopen = () => {
-    ws.send(JSON.stringify({ 'action': 'subscribe', 'group_name': 'all', 'request_id': 1 }));
-    ws.send(JSON.stringify({ 'action': 'list', 'request_id': 1 }));
-  }
+  if (process.env.NODE_ENV === 'production') {
+    const ws = createWs('user/');
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ 'action': 'subscribe', 'group_name': 'all', 'request_id': 1 }));
+      ws.send(JSON.stringify({ 'action': 'list', 'request_id': 1 }));
+    }
 
-  ws.onmessage = event => {
-    console.log(event);
+    ws.onmessage = event => {
+      console.log(event);
+    }
   }
 
   return (

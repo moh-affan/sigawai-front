@@ -55,7 +55,7 @@
         "jss-rtl": "^0.2.3",
         "moment": "^2.24.0",
         "mui-datatables": "^2.9.0",
-        "next": "^9.0.3",
+        "next": "^9.3.2",
         "next-cookies": "^1.1.2",
         "node-sass": "^4.12.0",
         "path": "^0.12.7",
